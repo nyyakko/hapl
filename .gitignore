@@ -2,6 +2,7 @@
 .cache/
 .vscode/
 .vs/
+data/
 
 data/
 build/
