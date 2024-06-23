@@ -4,7 +4,6 @@
 #include <Eigen/Eigen>
 #include <fmt/format.h>
 #include <fplus/fplus.hpp>
-#include <raylib.h>
 
 auto layer_dense_forward(Eigen::MatrixXd const& weights, Eigen::Matrix<double, 1, Eigen::Dynamic> const& biases, Eigen::MatrixXd const& inputs)
 {
@@ -50,8 +49,8 @@ auto activation_softmax_forward(Eigen::MatrixXd const& outputs)
 
     for (auto rowIndex : fplus::numbers(0l, outputs.rows()))
     {
-         result.row(rowIndex) = result.row(rowIndex).unaryExpr([max = result.row(rowIndex).maxCoeff()] (auto x) { return std::pow(std::numbers::e, x - max); }).eval();
-         result.row(rowIndex) = result.row(rowIndex).unaryExpr([sum = result.row(rowIndex).sum()] (auto x) { return x / sum; }).eval();
+        result.row(rowIndex) = result.row(rowIndex).unaryExpr([max = result.row(rowIndex).maxCoeff()] (auto x) { return std::pow(std::numbers::e, x - max); }).eval();
+        result.row(rowIndex) = result.row(rowIndex).unaryExpr([sum = result.row(rowIndex).sum()] (auto x) { return x / sum; }).eval();
     }
 
     return result.eval();
